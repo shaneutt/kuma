@@ -656,7 +656,6 @@ workflows:
   version: 2
   kuma-commit:
     jobs:
-    - create-local-cluster
     - dev_golang
     - dev_mac
     - dev_ubuntu
@@ -681,6 +680,9 @@ workflows:
     - images:
         requires:
         - build
+    - create-local-cluster:
+        requires:
+        - images
     - example_docker-compose:
         name: docker-compose
         requires:
