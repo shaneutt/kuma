@@ -449,8 +449,6 @@ jobs:
             curl -L -o openshift-client.zip "$DOWNLOAD_URL"
             tar xvf openshift-client.zip --strip-components=1
 
-#            unzip openshift-client.zip
-
             chmod +x ./oc
             chmod +x ./kubectl
 
