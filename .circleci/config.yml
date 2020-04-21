@@ -476,9 +476,9 @@ jobs:
 #          username: dev1
       - run:
           command: |
-            cd openshift.local.clusterup/openshift-apiserver
+            sudo cd /osdata
 
-            cat \<< EOF > master-config.patch
+            sudo cat \<< EOF > master-config.patch
             admissionConfig:
               pluginConfig:
                 MutatingAdmissionWebhook:
@@ -493,9 +493,9 @@ jobs:
                     kind: WebhookAdmission
             EOF
 
-            cp -p master-config.yaml master-config.yaml.prepatch
-            oc ex config patch master-config.yaml.prepatch -p "$(cat master-config.patch)" > master-config.yaml
-            cd ../../
+            sudo cp -p master-config.yaml master-config.yaml.prepatch
+            sudo oc ex config patch master-config.yaml.prepatch -p "$(cat master-config.patch)" > master-config.yaml
+            cd -
 
             sudo oc cluster down
             sudo oc cluster up --base-dir=/osdata --use-existing-config --skip-registry-check=true
