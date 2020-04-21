@@ -498,7 +498,7 @@ jobs:
             cd -
 
             oc cluster down
-            oc cluster up --base-dir=osdata --use-existing-config --skip-registry-check=true
+            oc cluster up --base-dir=osdata --skip-registry-check=true
           name: Patch master-config.yaml
       - run:
           command: |
