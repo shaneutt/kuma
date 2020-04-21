@@ -435,7 +435,7 @@ jobs:
             echo '{"insecure-registries": ["172.30.0.0/16"]}' | sudo tee /etc/docker/daemon.json # see https://github.com/openshift/origin/blob/release-3.11/docs/cluster_up_down.md
             sudo /etc/init.d/docker restart
 
-            oc cluster up --skip-registry-check=true --base-dir=/osdata
+            sudo oc cluster up --skip-registry-check=true --base-dir=/osdata
           name: Create local cluster with the oc CLI (requires machine executor)
 #      - redhat-openshift/login-and-update-kubeconfig:
 #          insecure-skip-tls-verify: true
@@ -466,8 +466,8 @@ jobs:
             oc ex config patch master-config.yaml.prepatch -p "$(cat master-config.patch)" > master-config.yaml
             cd ../../
 
-            oc cluster down
-            oc cluster up --base-dir=/osdata --use-existing-config --skip-registry-check=true
+            sudo oc cluster down
+            sudo oc cluster up --base-dir=/osdata --use-existing-config --skip-registry-check=true
           name: Patch master-config.yaml
       - run:
           command: |
