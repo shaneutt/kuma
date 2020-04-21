@@ -476,7 +476,7 @@ jobs:
 #          username: dev1
       - run:
           command: |
-            cd osdata
+            cd osdata/openshift-apiserver
 
             sudo cat \<< EOF > master-config.patch
             admissionConfig:
