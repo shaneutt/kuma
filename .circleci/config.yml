@@ -499,6 +499,7 @@ jobs:
 
             oc cluster down
             oc cluster up --base-dir=osdata --skip-registry-check=true
+            cat osdata/openshift-apiserver/master-config.yaml
           name: Patch master-config.yaml
       - run:
           command: |
