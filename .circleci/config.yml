@@ -428,7 +428,7 @@ jobs:
 #      - redhat-openshift/create-local-cluster-with-oc:
 #          skip-registry-check: true
 #          host-data-dir: /osdata
-      - redhat-openshift/install-openshift-cli:
+      - redhat-openshift/install-openshift-cli
       - run:
           command: |
 
