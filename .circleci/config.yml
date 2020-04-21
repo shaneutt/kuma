@@ -447,8 +447,9 @@ jobs:
               | awk '/browser_download_url/ {print $2}' \
               | sed 's/"//g')
             curl -L -o openshift-client.zip "$DOWNLOAD_URL"
-#            tar xvf openshift-client.zip --strip-components=1
-            unzip openshift-client.zip
+            tar xvf openshift-client.zip --strip-components=1
+
+#            unzip openshift-client.zip
 
             chmod +x ./oc
             chmod +x ./kubectl
