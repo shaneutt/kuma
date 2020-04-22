@@ -511,9 +511,8 @@ jobs:
             OPENSHIFT_TOKEN=$(oc whoami -t)
             echo "OpenShift Token - ${OPENSHIFT_TOKEN}"
 
-            make docker/tag/kuma-cp
+            make docker/load
             docker login -u developer -p ${OPENSHIFT_TOKEN} 172.30.1.1:5000
-            make docker/load/kuma-cp
             docker images
           name: Load images
       - run:
