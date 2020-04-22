@@ -431,6 +431,9 @@ jobs:
           at: build
       - run:
           command: |
+            ls -la build
+            ls -la build/docker-images
+
             if which oc > /dev/null; then
               echo "The OpenShift client CLI is already installed"
               exit 0
