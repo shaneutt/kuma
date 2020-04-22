@@ -337,6 +337,13 @@ deploy/example/minikube: deploy/kuma/minikube ## Minikube: Deploy example setup
 	kubectl wait --timeout=60s --for=condition=Available -n kuma-demo deployment/demo-client
 	kubectl wait --timeout=60s --for=condition=Ready -n kuma-demo pods -l app=demo-client
 
+deploy/example/openshift: ## OpenShift: Deploy example setup
+	oc apply -f tools/e2e/examples/minikube/kuma-demo/
+	oc wait --timeout=60s --for=condition=Available -n kuma-demo deployment/demo-app
+	oc wait --timeout=60s --for=condition=Ready -n kuma-demo pods -l app=demo-app
+	oc wait --timeout=60s --for=condition=Available -n kuma-demo deployment/demo-client
+	oc wait --timeout=60s --for=condition=Ready -n kuma-demo pods -l app=demo-client
+
 deploy/example/minikube/metrics: ## Minikube: Deploy metrics setup
 	eval $$(minikube docker-env) && $(call pull_docker_images)
 	eval $$(minikube docker-env) && docker run --rm $(KUMACTL_DOCKER_IMAGE) kumactl install metrics $(KUMACTL_INSTALL_METRICS_IMAGES) | kubectl apply -f -

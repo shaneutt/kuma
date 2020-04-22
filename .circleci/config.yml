@@ -547,9 +547,15 @@ jobs:
             oc login -u system:admin
 
             make deploy/kuma/openshift
-            oc get pods -nkuma-system
+            oc get pods -n kuma-system
 
-          name: Test the cluster
+            oc login https://127.0.0.1:8443 --username=dev1 --password=password
+            oc new-project kuma-demo
+
+            make deploy/example/openshift
+            oc get pods -n kuma-demo
+
+      name: Test the cluster
 
   example_minikube:
     executor: vm
