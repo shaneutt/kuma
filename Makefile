@@ -513,6 +513,10 @@ docker/load/kuma-init: ${BUILD_DOCKER_IMAGES_DIR}/kuma-init.tar
 docker/load/kuma-prometheus-sd: ${BUILD_DOCKER_IMAGES_DIR}/kuma-prometheus-sd.tar
 	docker load --input ${BUILD_DOCKER_IMAGES_DIR}/kuma-prometheus-sd.tar
 
+docker/tag/kuma-cp: docker/load/kuma-cp
+	docker tag $(KUMA_CP_DOCKER_IMAGE) 172.30.1.1:5000/kuma-system/kuma-cp:$(BUILD_INFO_VERSION)
+	docker save --output ${BUILD_DOCKER_IMAGES_DIR}/kuma-cp.tar 172.30.1.1:5000/kuma-system/kuma-cp:$(BUILD_INFO_VERSION)
+
 image/kuma-cp/push: image/kuma-cp
 	docker login -u $(BINTRAY_USERNAME) -p $(BINTRAY_API_KEY) $(BINTRAY_REGISTRY)
 	docker tag $(KUMA_CP_DOCKER_IMAGE) $(BINTRAY_REGISTRY)/kuma-cp:$(KUMA_VERSION)
