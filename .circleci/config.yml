@@ -555,7 +555,7 @@ jobs:
             make deploy/example/openshift
             oc get pods -n kuma-demo
 
-      name: Test the cluster
+          name: Test the cluster
 
   example_minikube:
     executor: vm
