@@ -321,7 +321,14 @@ deploy/kuma/minikube: ## Minikube: Deploy Kuma with no demo app
 	kubectl wait --timeout=60s --for=condition=Available -n kuma-system deployment/kuma-injector
 	kubectl wait --timeout=60s --for=condition=Ready -n kuma-system pods -l app=kuma-injector
 	kubectl wait --timeout=60s --for=condition=Available -n kuma-system deployment/kuma-control-plane
-	kubectl wait --timeout=60s --for=condition=Ready -n kuma-system pods -l app=kuma-control-plane	
+	kubectl wait --timeout=60s --for=condition=Ready -n kuma-system pods -l app=kuma-control-plane
+
+deploy/kuma/openshift: ## OpenShift: Deploy Kuma with no demo app
+	docker run --rm $(KUMACTL_DOCKER_IMAGE) kumactl install control-plane $(KUMACTL_INSTALL_CONTROL_PLANE_IMAGES) | oc apply -f -
+	oc wait --timeout=60s --for=condition=Available -n kuma-system deployment/kuma-injector
+	oc wait --timeout=60s --for=condition=Ready -n kuma-system pods -l app=kuma-injector
+	oc wait --timeout=60s --for=condition=Available -n kuma-system deployment/kuma-control-plane
+	oc wait --timeout=60s --for=condition=Ready -n kuma-system pods -l app=kuma-control-plane
 
 deploy/example/minikube: deploy/kuma/minikube ## Minikube: Deploy example setup
 	kubectl apply -f tools/e2e/examples/minikube/kuma-demo/

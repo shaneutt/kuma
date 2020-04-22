@@ -543,13 +543,10 @@ jobs:
             oc login "$@"
           name: Perform login (and kubeconfig update)
       - run:
-          command: >
-            oc new-project localclustertestproject
+          command: |
+            make deploy/kuma/openshift
+            oc get pods -nkuma-system
 
-            oc new-app
-            centos/ruby-25-centos7~https://github.com/sclorg/ruby-ex.git
-
-            kubectl get services
           name: Test the cluster
 
   example_minikube:
