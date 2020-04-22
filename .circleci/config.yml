@@ -502,7 +502,11 @@ jobs:
       - run:
           command: |
             oc login -u system:admin
-            oc rollout retry dc/docker-registry dc/router -n default
+            oc project default
+            oc adm policy add-cluster-role-to-user system:controller:replication-controller -z deployer
+
+            oc rollout latest dc/docker-registry
+            oc rollout latest dc/router
 
             REGISTRY_IP=$(oc get svc docker-registry -n default | grep docker-registry | awk '{print $3}')
             echo "Registry IP - ${REGISTRY_IP}"
