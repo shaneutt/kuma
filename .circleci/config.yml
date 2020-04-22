@@ -514,6 +514,7 @@ jobs:
             make docker/load
             docker login -u developer -p ${OPENSHIFT_TOKEN} 172.30.1.1:5000
             docker images
+            make docker/tag
           name: Load images
       - run:
           command: |
