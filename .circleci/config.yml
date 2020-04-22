@@ -497,12 +497,12 @@ jobs:
 
             oc cluster down
             oc cluster up --base-dir=osdata --skip-registry-check=true
-            oc rollout retry dc/docker-registry dc/router -n default
             cat osdata/openshift-apiserver/master-config.yaml
           name: Patch master-config.yaml
       - run:
           command: |
             oc login -u system:admin
+            oc rollout retry dc/docker-registry dc/router -n default
 
             REGISTRY_IP=$(oc get svc docker-registry -n default | grep docker-registry | awk '{print $3}')
             echo "Registry IP - ${REGISTRY_IP}"
