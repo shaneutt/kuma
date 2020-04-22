@@ -544,6 +544,8 @@ jobs:
           name: Perform login (and kubeconfig update)
       - run:
           command: |
+            oc login -u system:admin
+
             make deploy/kuma/openshift
             oc get pods -nkuma-system
 
