@@ -497,6 +497,7 @@ jobs:
 
             oc cluster down
             oc cluster up --base-dir=osdata --skip-registry-check=true
+            oc rollout retry dc/docker-registry dc/router -n default
             cat osdata/openshift-apiserver/master-config.yaml
           name: Patch master-config.yaml
       - run:
