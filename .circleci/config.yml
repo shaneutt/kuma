@@ -564,6 +564,13 @@ jobs:
     - run:
         name: Install Minishift
         command: |
+          sudo apt install libvirt-bin qemu-kvm
+          sudo usermod -a -G libvirtd $(whoami)
+          newgrp libvirtd
+
+          curl -L https://github.com/dhiltgen/docker-machine-kvm/releases/download/v0.10.0/docker-machine-driver-kvm-ubuntu16.04 -o /usr/local/bin/docker-machine-driver-kvm
+          chmod +x /usr/local/bin/docker-machine-driver-kvm
+
           curl -L -o minishift.tgz https://github.com/minishift/minishift/releases/download/v1.34.2/minishift-1.34.2-linux-amd64.tgz
           tar zxvf minishift.tgz
           chmod +x minishift-1.34.2-linux-amd64/minishift
