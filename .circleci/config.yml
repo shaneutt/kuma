@@ -552,8 +552,9 @@ jobs:
             make deploy/example/openshift
             oc get pods -n kuma-demo
 
-            kubectl logs -l app=kuma-injector -nkuma-system
-            kubectl logs -l app=kuma-control-plane -nkuma-system
+            for pod in $(oc get pods -nkuma-system | awk 'NR>1{print $1}'); do
+              kubectl logs $pod -nkuma-system
+            done
 
           name: Test the cluster
 
