@@ -515,29 +515,32 @@ docker/load/kuma-prometheus-sd: ${BUILD_DOCKER_IMAGES_DIR}/kuma-prometheus-sd.ta
 
 docker/tag: docker/tag/kuma-cp docker/tag/kuma-dp docker/tag/kumactl docker/tag/kuma-injector docker/tag/kuma-init docker/tag/kuma-prometheus-sd
 
+PREFIX=lobkovilya
+#PREFIX=172.30.1.1:5000/kuma-system
+
 docker/tag/kuma-cp:
-	docker tag $(KUMA_CP_DOCKER_IMAGE) 172.30.1.1:5000/kuma-system/kuma-cp:$(BUILD_INFO_VERSION)
-	docker push 172.30.1.1:5000/kuma-system/kuma-cp:$(BUILD_INFO_VERSION)
+	docker tag $(KUMA_CP_DOCKER_IMAGE) $(PREFIX)/kuma-cp:$(BUILD_INFO_VERSION)
+	docker push $(PREFIX)/kuma-cp:$(BUILD_INFO_VERSION)
 
 docker/tag/kuma-dp:
-	docker tag $(KUMA_DP_DOCKER_IMAGE) 172.30.1.1:5000/kuma-system/kuma-dp:$(BUILD_INFO_VERSION)
-	docker push 172.30.1.1:5000/kuma-system/kuma-dp:$(BUILD_INFO_VERSION)
+	docker tag $(KUMA_DP_DOCKER_IMAGE) $(PREFIX)/kuma-dp:$(BUILD_INFO_VERSION)
+	docker push $(PREFIX)/kuma-dp:$(BUILD_INFO_VERSION)
 
 docker/tag/kumactl:
-	docker tag $(KUMACTL_DOCKER_IMAGE) 172.30.1.1:5000/kuma-system/kumactl:$(BUILD_INFO_VERSION)
-	docker push 172.30.1.1:5000/kuma-system/kumactl:$(BUILD_INFO_VERSION)
+	docker tag $(KUMACTL_DOCKER_IMAGE) $(PREFIX)/kumactl:$(BUILD_INFO_VERSION)
+	docker push $(PREFIX)/kumactl:$(BUILD_INFO_VERSION)
 
 docker/tag/kuma-injector:
-	docker tag $(KUMA_INJECTOR_DOCKER_IMAGE) 172.30.1.1:5000/kuma-system/kuma-injector:$(BUILD_INFO_VERSION)
-	docker push 172.30.1.1:5000/kuma-system/kuma-injector:$(BUILD_INFO_VERSION)
+	docker tag $(KUMA_INJECTOR_DOCKER_IMAGE) $(PREFIX)/kuma-injector:$(BUILD_INFO_VERSION)
+	docker push $(PREFIX)/kuma-injector:$(BUILD_INFO_VERSION)
 
 docker/tag/kuma-init:
-	docker tag $(KUMA_INIT_DOCKER_IMAGE) 172.30.1.1:5000/kuma-system/kuma-init:$(BUILD_INFO_VERSION)
-	docker push 172.30.1.1:5000/kuma-system/kuma-init:$(BUILD_INFO_VERSION)
+	docker tag $(KUMA_INIT_DOCKER_IMAGE) $(PREFIX)/kuma-init:$(BUILD_INFO_VERSION)
+	docker push $(PREFIX)/kuma-init:$(BUILD_INFO_VERSION)
 
 docker/tag/kuma-prometheus-sd:
-	docker tag $(KUMA_PROMETHEUS_SD_DOCKER_IMAGE) 172.30.1.1:5000/kuma-system/kuma-prometheus-sd:$(BUILD_INFO_VERSION)
-	docker push 172.30.1.1:5000/kuma-system/kuma-prometheus-sd:$(BUILD_INFO_VERSION)
+	docker tag $(KUMA_PROMETHEUS_SD_DOCKER_IMAGE) $(PREFIX)/kuma-prometheus-sd:$(BUILD_INFO_VERSION)
+	docker push $(PREFIX)/kuma-prometheus-sd:$(BUILD_INFO_VERSION)
 
 image/kuma-cp/push: image/kuma-cp
 	docker login -u $(BINTRAY_USERNAME) -p $(BINTRAY_API_KEY) $(BINTRAY_REGISTRY)

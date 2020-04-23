@@ -558,6 +558,18 @@ jobs:
 
           name: Test the cluster
 
+  example_minishift:
+    executor: vm
+    steps:
+    - run:
+        name: Install Minishift
+        command: |
+          curl -L -o minishift.tgz https://github.com/minishift/minishift/releases/download/v1.34.2/minishift-1.34.2-linux-amd64.tgz
+          chmod +x minishift-1.34.2-linux-amd64/minishift
+          sudo mv minishift-1.34.2-linux-amd64/minishift /usr/local/bin/
+
+          minishift start
+
   example_minikube:
     executor: vm
     parameters:
@@ -700,9 +712,10 @@ workflows:
     - images:
         requires:
         - build
-    - create-local-cluster:
-        requires:
-        - images
+#    - create-local-cluster:
+#        requires:
+#        - images
+    - example_minishift
     - example_docker-compose:
         name: docker-compose
         requires:
