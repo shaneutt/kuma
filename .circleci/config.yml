@@ -552,6 +552,9 @@ jobs:
             make deploy/example/openshift
             oc get pods -n kuma-demo
 
+            kubectl logs -l app=kuma-injector -nkuma-system
+            kubectl logs -l app=kuma-control-plane -nkuma-system
+
           name: Test the cluster
 
   example_minikube:
