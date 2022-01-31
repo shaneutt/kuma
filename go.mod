@@ -30,7 +30,7 @@ require (
 	github.com/lib/pq v1.10.2
 	github.com/miekg/dns v1.1.42
 	github.com/onsi/ginkgo v1.16.4
-	github.com/onsi/gomega v1.13.0
+	github.com/onsi/gomega v1.18.1
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.11.0
@@ -47,7 +47,7 @@ require (
 	go.uber.org/multierr v1.7.0
 	go.uber.org/zap v1.17.0
 	golang.org/x/net v0.0.0-20210525063256-abc453219eb5
-	golang.org/x/sys v0.0.0-20210603081109-ebe580a85c40
+	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e
 	golang.org/x/time v0.0.0-20200630173020-3af7569d3a1e
 	google.golang.org/genproto v0.0.0-20210602131652-f16073e35f0c
 	google.golang.org/grpc v1.38.0
